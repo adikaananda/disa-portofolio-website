@@ -135,6 +135,37 @@ export default function AchievementsSection() {
           height: 260px;
         }
 
+        /* Mobile flower decorations */
+        @media (max-width: 640px) {
+          .flower-top-left {
+            left: -80px;
+            top: -120px;
+            width: 200px;
+            height: 200px;
+          }
+
+          .flower-top-right {
+            right: -60px;
+            top: -40px;
+            width: 140px;
+            height: 140px;
+          }
+
+          .flower-bottom-left {
+            left: -50px;
+            bottom: -10px;
+            width: 120px;
+            height: 120px;
+          }
+
+          .flower-bottom-right {
+            right: -50px;
+            bottom: 0px;
+            width: 130px;
+            height: 130px;
+          }
+        }
+
         .achievement-card {
           background: #FFFFFF;
           border-radius: 40px;
@@ -142,6 +173,14 @@ export default function AchievementsSection() {
           box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
           position: relative;
           overflow: hidden;
+        }
+
+        /* Mobile card styling */
+        @media (max-width: 640px) {
+          .achievement-card {
+            border-radius: 24px;
+            border: 4px solid #E75A8C;
+          }
         }
 
         .achievement-card::before {
@@ -164,6 +203,11 @@ export default function AchievementsSection() {
           position: relative;
         }
 
+        @media (max-width: 640px) {
+          .certificate-preview {
+            border-radius: 12px;
+          }
+        }
 
         .certificate-preview:hover {
           transform: translateY(-8px) scale(1.02);
@@ -184,6 +228,22 @@ export default function AchievementsSection() {
           box-shadow: 0 4px 10px rgba(231, 90, 140, 0.3);
         }
 
+        /* Mobile badge styling */
+        @media (max-width: 640px) {
+          .badge {
+            border-radius: 10px;
+            padding: 6px 16px;
+            font-size: 11px !important;
+          }
+        }
+
+        @media (max-width: 380px) {
+          .badge {
+            padding: 5px 12px;
+            font-size: 10px !important;
+          }
+        }
+
         .btn-primary {
           background: linear-gradient(135deg, #E75A8C 0%, #FF69B4 100%);
           border: none;
@@ -199,6 +259,34 @@ export default function AchievementsSection() {
           gap: 10px;
           font-size: 14px;
           text-transform: uppercase;
+        }
+
+        /* Mobile button styling */
+        @media (max-width: 640px) {
+          .btn-primary {
+            padding: 10px 20px;
+            font-size: 11px;
+            gap: 6px;
+            border-radius: 30px;
+          }
+          
+          .btn-primary svg {
+            width: 16px;
+            height: 16px;
+          }
+        }
+
+        @media (max-width: 380px) {
+          .btn-primary {
+            padding: 8px 16px;
+            font-size: 10px;
+            gap: 4px;
+          }
+          
+          .btn-primary svg {
+            width: 14px;
+            height: 14px;
+          }
         }
 
         .btn-primary:hover {
@@ -247,10 +335,18 @@ export default function AchievementsSection() {
 
         @media (max-width: 640px) {
           .arrow-btn {
-            width: 36px;
-            height: 36px;
-            font-size: 18px;
+            width: 32px;
+            height: 32px;
+            font-size: 16px;
             border-width: 2px;
+          }
+        }
+
+        @media (max-width: 380px) {
+          .arrow-btn {
+            width: 28px;
+            height: 28px;
+            font-size: 14px;
           }
         }
 
@@ -268,6 +364,12 @@ export default function AchievementsSection() {
           z-index: 1000;
           padding: 20px;
           animation: fadeIn 0.3s ease;
+        }
+
+        @media (max-width: 640px) {
+          .modal-overlay {
+            padding: 10px;
+          }
         }
 
         @keyframes fadeIn {
@@ -304,12 +406,26 @@ export default function AchievementsSection() {
           box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
         }
 
+        @media (max-width: 640px) {
+          .modal-certificate-img {
+            max-height: 70vh;
+            border-radius: 8px;
+          }
+        }
+
         .modal-actions {
           display: flex;
           gap: 16px;
           margin-top: 24px;
           flex-wrap: wrap;
           justify-content: center;
+        }
+
+        @media (max-width: 640px) {
+          .modal-actions {
+            gap: 10px;
+            margin-top: 16px;
+          }
         }
 
         .modal-btn {
@@ -328,6 +444,32 @@ export default function AchievementsSection() {
           font-size: 15px;
           text-transform: uppercase;
           font-family: 'Fredoka', sans-serif;
+        }
+
+        @media (max-width: 640px) {
+          .modal-btn {
+            padding: 10px 20px;
+            font-size: 11px;
+            gap: 8px;
+          }
+          
+          .modal-btn svg {
+            width: 16px;
+            height: 16px;
+          }
+        }
+
+        @media (max-width: 380px) {
+          .modal-btn {
+            padding: 8px 16px;
+            font-size: 10px;
+            gap: 6px;
+          }
+          
+          .modal-btn svg {
+            width: 14px;
+            height: 14px;
+          }
         }
 
         .modal-btn:hover {
@@ -358,6 +500,15 @@ export default function AchievementsSection() {
           font-weight: bold;
           z-index: 10;
           transition: all 0.3s ease;
+        }
+
+        @media (max-width: 640px) {
+          .modal-close {
+            top: -40px;
+            width: 36px;
+            height: 36px;
+            font-size: 24px;
+          }
         }
 
         .modal-close:hover {
@@ -430,33 +581,42 @@ export default function AchievementsSection() {
 
         @media (max-width: 640px) {
           .arrow-left {
-            left: 6px;
+            left: 4px;
           }
           .arrow-right {
-            right: 6px;
+            right: 4px;
+          }
+        }
+
+        @media (max-width: 380px) {
+          .arrow-left {
+            left: 2px;
+          }
+          .arrow-right {
+            right: 2px;
           }
         }
       `}</style>
 
-      <section id="achievements" className="achievements-section py-20 lg:py-32" ref={sectionRef}>
+      <section id="achievements" className="achievements-section py-12 sm:py-16 md:py-20 lg:py-32" ref={sectionRef}>
         {/* Flower Decorations */}
         <img src="/Skills/Bunga Kiri.png" alt="" className="flower-decoration flower-top-left" />
         <img src="/Skills/Bunga Kiri.png" alt="" className="flower-decoration flower-top-right" style={{ transform: 'scaleX(-1)' }} />
         <img src="/Skills/Bunga Kiri.png" alt="" className="flower-decoration flower-bottom-left" />
         <img src="/Skills/Bunga Kiri.png" alt="" className="flower-decoration flower-bottom-right" style={{ transform: 'scaleX(-1)' }} />
 
-        <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
           
-          {/* Header */}
-          <div className={`text-center mb-16 fade-in-up ${isVisible ? 'visible' : ''}`}>
+          {/* Header - Responsive Typography */}
+          <div className={`text-center mb-8 sm:mb-12 md:mb-16 fade-in-up ${isVisible ? 'visible' : ''}`}>
             <h2 
-              className="text-5xl lg:text-6xl xl:text-7xl font-extrabold text-white mb-4 uppercase"
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold text-white mb-2 sm:mb-3 md:mb-4 uppercase"
               style={{ fontFamily: "'Fredoka', sans-serif", textShadow: '4px 4px 0px rgba(0,0,0,0.1)' }}
             >
               ACHIEVEMENTS
             </h2>
             <p 
-              className="text-white text-lg lg:text-xl font-medium uppercase tracking-wide"
+              className="text-white text-xs sm:text-sm md:text-base lg:text-xl font-medium uppercase tracking-wide px-4"
               style={{ fontFamily: "'Fredoka', sans-serif" }}
             >
               COMPETITIONS I HAVE WON RECENTLY
@@ -465,8 +625,8 @@ export default function AchievementsSection() {
 
           {/* Achievement Slider */}
           <div className={`nav-container fade-in-up ${isVisible ? 'visible' : ''}`}>
-            <div className="achievement-card p-8 lg:p-12">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+            <div className="achievement-card p-4 sm:p-6 md:p-8 lg:p-12">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-center">
                 
                 {/* Left Side - Certificate Image */}
                 <div 
@@ -480,45 +640,45 @@ export default function AchievementsSection() {
                   />
                 </div>
 
-                {/* Right Side - Achievement Info */}
-                <div className="space-y-6 slide-transition">
+                {/* Right Side - Achievement Info - Responsive Typography */}
+                <div className="space-y-3 sm:space-y-4 md:space-y-6 slide-transition">
                   <h3 
-                    className="text-4xl lg:text-5xl xl:text-6xl font-extrabold uppercase leading-tight"
+                    className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold uppercase leading-tight"
                     style={{ fontFamily: "'Fredoka', sans-serif", color: '#FFC632' }}
                   >
                     {achievements[currentSlide].title}
                   </h3>
                   
                   <h4 
-                    className="text-2xl lg:text-3xl font-extrabold uppercase leading-tight"
+                    className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl font-extrabold uppercase leading-tight"
                     style={{ fontFamily: "'Fredoka', sans-serif", color: '#E75A8C' }}
                   >
                     {achievements[currentSlide].subtitle}
                   </h4>
 
                   <p 
-                    className="text-xl lg:text-2xl font-bold uppercase"
+                    className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl font-bold uppercase"
                     style={{ fontFamily: "'Fredoka', sans-serif", color: '#FF69B4' }}
                   >
                     {achievements[currentSlide].organization}
                   </p>
 
-                  <div className="flex flex-wrap gap-4">
+                  <div className="flex flex-wrap gap-2 sm:gap-3 md:gap-4">
                     <span 
                       className="badge"
-                      style={{ fontFamily: "'Fredoka', sans-serif", fontSize: '16px' }}
+                      style={{ fontFamily: "'Fredoka', sans-serif", fontSize: '14px' }}
                     >
                       {achievements[currentSlide].date}
                     </span>
                     <span 
                       className="badge"
-                      style={{ fontFamily: "'Fredoka', sans-serif", fontSize: '16px' }}
+                      style={{ fontFamily: "'Fredoka', sans-serif", fontSize: '14px' }}
                     >
                       {achievements[currentSlide].type}
                     </span>
                   </div>
 
-                  <div className="flex flex-wrap gap-4 pt-4">
+                  <div className="flex flex-wrap gap-2 sm:gap-3 md:gap-4 pt-2 sm:pt-3 md:pt-4">
                     <button 
                       className="btn-primary"
                       style={{ fontFamily: "'Fredoka', sans-serif" }}
@@ -570,14 +730,14 @@ export default function AchievementsSection() {
 
           {/* Slide Indicators */}
           {achievements.length > 1 && (
-            <div className="flex justify-center gap-3 mt-8">
+            <div className="flex justify-center gap-2 sm:gap-3 mt-6 sm:mt-8">
               {achievements.map((_, index) => (
                 <button
                   key={index}
                   onClick={() => setCurrentSlide(index)}
-                  className={`w-4 h-4 rounded-full transition-all ${
+                  className={`w-3 h-3 sm:w-4 sm:h-4 rounded-full transition-all ${
                     currentSlide === index 
-                      ? 'bg-white w-8' 
+                      ? 'bg-white w-6 sm:w-8' 
                       : 'bg-white/50 hover:bg-white/75'
                   }`}
                   aria-label={`Go to slide ${index + 1}`}

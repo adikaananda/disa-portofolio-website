@@ -192,12 +192,7 @@ export default function Footer() {
                   >
                     disadharmasaputra@gmail.com
                   </a>
-                  <a 
-                    href="mailto:putudisakalindadharmasaputra@mail.ugm.ac.id"
-                    className="block text-white opacity-90 hover:opacity-100 transition-all duration-300 text-[15px] font-medium"
-                  >
-                    putudisakalindadharmasaputra@mail.ugm.ac.id
-                  </a>
+            
                 </div>
                 
                 <a 

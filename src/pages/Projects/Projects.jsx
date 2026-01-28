@@ -422,9 +422,15 @@ export default function ProjectsGallery() {
           grid-row: span 2;
         }
 
+        /* Mobile Responsive Styles */
         @media (max-width: 768px) {
+          .hero-wave-bg::before {
+            height: 80px;
+          }
+
           .masonry-grid {
             grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
           }
           
           .masonry-item-large,
@@ -432,11 +438,66 @@ export default function ProjectsGallery() {
             grid-column: span 1;
           }
 
+          .masonry-item-tall {
+            grid-row: span 1;
+          }
+
           .image-popup-close {
             top: -40px;
             width: 35px;
             height: 35px;
             font-size: 20px;
+          }
+
+          .section-header::after {
+            height: 4px;
+            bottom: -6px;
+          }
+        }
+
+        /* Small Mobile Optimization (iPhone SE, small Android) */
+        @media (max-width: 375px) {
+          .hero-wave-bg::before {
+            height: 60px;
+          }
+
+          .masonry-grid {
+            grid-template-columns: 1fr;
+            gap: 10px;
+          }
+
+          .image-popup-close {
+            top: -35px;
+            width: 30px;
+            height: 30px;
+            font-size: 18px;
+          }
+
+          .image-popup-overlay {
+            padding: 15px;
+          }
+
+          .section-header::after {
+            height: 3px;
+            bottom: -5px;
+          }
+
+          /* Disable hover effects on small mobile */
+          .project-card:hover {
+            transform: none;
+            box-shadow: 0 4px 8px rgba(255, 105, 180, 0.2);
+          }
+
+          .project-card:hover::before {
+            opacity: 0;
+          }
+
+          .project-card:hover img {
+            transform: none;
+          }
+
+          .view-more-btn:hover {
+            transform: none;
           }
         }
       `}</style>
@@ -457,10 +518,10 @@ export default function ProjectsGallery() {
         )}
 
         {/* HERO SECTION */}
-        <div className="hero-wave-bg py-24 lg:py-32 relative" ref={addToRefs('hero')}>
-          <div className="max-w-7xl mx-auto px-6 lg:px-12 text-center relative z-10">
+        <div className="hero-wave-bg py-12 sm:py-16 md:py-24 lg:py-32 relative" ref={addToRefs('hero')}>
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 text-center relative z-10">
             <h1 
-              className={`text-5xl lg:text-7xl font-extrabold text-white mb-6 zoom-in ${isVisible('hero') ? 'visible' : ''}`}
+              className={`text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-extrabold text-white mb-4 sm:mb-6 zoom-in ${isVisible('hero') ? 'visible' : ''}`}
               style={{ 
                 fontFamily: "'Fredoka', sans-serif",
                 textShadow: '0 4px 20px rgba(0,0,0,0.1)'
@@ -469,20 +530,22 @@ export default function ProjectsGallery() {
               PROJECTS GALLERY
             </h1>
             <p 
-              className={`text-lg lg:text-xl font-medium text-white max-w-3xl mx-auto fade-in-up delay-300 ${isVisible('hero') ? 'visible' : ''}`}
+              className={`text-xs sm:text-sm md:text-base lg:text-xl font-medium text-white max-w-3xl mx-auto px-2 fade-in-up delay-300 ${isVisible('hero') ? 'visible' : ''}`}
               style={{ 
                 fontFamily: "'Fredoka', sans-serif",
-                textShadow: '0 2px 10px rgba(0,0,0,0.1)'
+                textShadow: '0 2px 10px rgba(0,0,0,0.1)',
+                lineHeight: '1.6'
               }}
             >
-              THIS PAGE IS DEDICATED TO AN ARRAY OF PROJECTS I HAVE CREATED FOR<br />
+              THIS PAGE IS DEDICATED TO AN ARRAY OF PROJECTS I HAVE CREATED FOR
+              <br className="hidden sm:inline" />
               UNIVERSITY, COMPETITIONS, COMMISSIONS, AND PERSONAL PROJECTS.
             </p>
 
             {/* Featured Projects Grid */}
-            <div className={`grid grid-cols-2 lg:grid-cols-3 gap-6 mt-16 fade-in-up delay-500 ${isVisible('hero') ? 'visible' : ''}`}>
+            <div className={`grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-6 mt-8 sm:mt-12 md:mt-16 fade-in-up delay-500 ${isVisible('hero') ? 'visible' : ''}`}>
               <div 
-                className={`project-card rounded-3xl overflow-hidden shadow-xl bg-white scale-in delay-600 ${isVisible('hero') ? 'visible' : ''}`}
+                className={`project-card rounded-2xl sm:rounded-3xl overflow-hidden shadow-xl bg-white scale-in delay-600 ${isVisible('hero') ? 'visible' : ''}`}
                 onClick={() => openImagePopup('/ProjectsGallery/1.jpg')}
               >
                 <div className="aspect-square">
@@ -495,7 +558,7 @@ export default function ProjectsGallery() {
               </div>
 
               <div 
-                className={`project-card rounded-3xl overflow-hidden shadow-xl bg-white scale-in delay-700 ${isVisible('hero') ? 'visible' : ''}`}
+                className={`project-card rounded-2xl sm:rounded-3xl overflow-hidden shadow-xl bg-white scale-in delay-700 ${isVisible('hero') ? 'visible' : ''}`}
                 onClick={() => openImagePopup('/ProjectsGallery/2.jpg')}
               >
                 <div className="aspect-square">
@@ -508,7 +571,7 @@ export default function ProjectsGallery() {
               </div>
 
               <div 
-                className={`project-card rounded-3xl overflow-hidden shadow-xl bg-white col-span-2 lg:col-span-1 lg:row-span-2 scale-in delay-800 ${isVisible('hero') ? 'visible' : ''}`}
+                className={`project-card rounded-2xl sm:rounded-3xl overflow-hidden shadow-xl bg-white col-span-2 lg:col-span-1 lg:row-span-2 scale-in delay-800 ${isVisible('hero') ? 'visible' : ''}`}
                 onClick={() => openImagePopup('/ProjectsGallery/3.jpeg')}
               >
                 <div className="h-full">
@@ -521,7 +584,7 @@ export default function ProjectsGallery() {
               </div>
 
               <div 
-                className={`project-card rounded-3xl overflow-hidden shadow-xl bg-white col-span-2 scale-in delay-900 ${isVisible('hero') ? 'visible' : ''}`}
+                className={`project-card rounded-2xl sm:rounded-3xl overflow-hidden shadow-xl bg-white col-span-2 scale-in delay-900 ${isVisible('hero') ? 'visible' : ''}`}
                 onClick={() => openImagePopup('/ProjectsGallery/5.jpeg')}
               >
                 <div className="aspect-[2/1]">
@@ -534,7 +597,7 @@ export default function ProjectsGallery() {
               </div>
 
               <div 
-                className={`project-card rounded-3xl overflow-hidden shadow-xl bg-white scale-in delay-1000 ${isVisible('hero') ? 'visible' : ''}`}
+                className={`project-card rounded-2xl sm:rounded-3xl overflow-hidden shadow-xl bg-white scale-in delay-1000 ${isVisible('hero') ? 'visible' : ''}`}
                 onClick={() => openImagePopup('/ProjectsGallery/6.jpg')}
               >
                 <div className="aspect-square">
@@ -547,7 +610,7 @@ export default function ProjectsGallery() {
               </div>
 
               <div 
-                className={`project-card rounded-3xl overflow-hidden shadow-xl bg-white scale-in delay-1100 ${isVisible('hero') ? 'visible' : ''}`}
+                className={`project-card rounded-2xl sm:rounded-3xl overflow-hidden shadow-xl bg-white scale-in delay-1100 ${isVisible('hero') ? 'visible' : ''}`}
                 onClick={() => openImagePopup('/ProjectsGallery/4.jpeg')}
               >
                 <div className="aspect-square">
@@ -560,7 +623,7 @@ export default function ProjectsGallery() {
               </div>
 
               <div 
-                className={`project-card rounded-3xl overflow-hidden shadow-xl bg-white scale-in delay-1200 ${isVisible('hero') ? 'visible' : ''}`}
+                className={`project-card rounded-2xl sm:rounded-3xl overflow-hidden shadow-xl bg-white scale-in delay-1200 ${isVisible('hero') ? 'visible' : ''}`}
                 onClick={() => openImagePopup('/ProjectsGallery/26.jpeg')}
               >
                 <div className="aspect-square">
@@ -573,25 +636,24 @@ export default function ProjectsGallery() {
               </div>
             </div>
 
-            {/* More Projects Button - Changed arrow direction to down */}
+            {/* More Projects Button */}
             <a 
               href="#university-projects"
-              className={`view-more-btn inline-flex items-center gap-3 px-10 py-4 rounded-full text-white text-lg font-extrabold uppercase mt-12 zoom-in delay-1200 ${isVisible('hero') ? 'visible' : ''}`}
+              className={`view-more-btn inline-flex items-center gap-2 sm:gap-3 px-6 sm:px-8 md:px-10 py-3 sm:py-4 rounded-full text-white text-xs sm:text-sm md:text-base lg:text-lg font-extrabold uppercase mt-8 sm:mt-10 md:mt-12 zoom-in delay-1200 ${isVisible('hero') ? 'visible' : ''}`}
               style={{ fontFamily: "'Fredoka', sans-serif" }}
             >
               MORE PROJECTS RIGHT HERE 
-    
             </a>
           </div>
         </div>
 
         {/* UNIVERSITY PROJECTS SECTION */}
-        <div id="university-projects" className="py-24 relative z-10" ref={addToRefs('university')}>
-          <div className="max-w-7xl mx-auto px-6 lg:px-12">
-            <div className="flex justify-between items-end mb-12">
+        <div id="university-projects" className="py-12 sm:py-16 md:py-24 relative z-10" ref={addToRefs('university')}>
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
+            <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-8 sm:mb-10 md:mb-12 gap-4">
               <div>
                 <h2 
-                  className={`section-header text-4xl lg:text-5xl font-extrabold mb-4 slide-in-left ${isVisible('university') ? 'visible' : ''}`}
+                  className={`section-header text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold mb-2 sm:mb-4 slide-in-left ${isVisible('university') ? 'visible' : ''}`}
                   style={{ 
                     fontFamily: "'Fredoka', sans-serif",
                     color: '#FF8C00'
@@ -601,22 +663,23 @@ export default function ProjectsGallery() {
                 </h2>
               </div>
               <p 
-                className={`text-sm lg:text-base font-medium max-w-md text-right slide-in-right ${isVisible('university') ? 'visible' : ''}`}
+                className={`text-xs sm:text-sm md:text-base font-medium max-w-md lg:text-right slide-in-right ${isVisible('university') ? 'visible' : ''}`}
                 style={{ 
                   fontFamily: "'Fredoka', sans-serif",
                   color: '#FF8C00',
-                  opacity: 0.8
+                  opacity: 0.8,
+                  lineHeight: '1.5'
                 }}
               >
                 THIS PAGE IS DEDICATED TO AN ARRAY OF PROJECTS I
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
               {universityProjects.map((project, index) => (
                 <div key={index} className={`flip-in delay-${(index + 2) * 100} ${isVisible('university') ? 'visible' : ''}`}>
                   <div 
-                    className="project-card rounded-3xl overflow-hidden shadow-xl bg-white"
+                    className="project-card rounded-2xl sm:rounded-3xl overflow-hidden shadow-xl bg-white"
                     onClick={() => openImagePopup(project.image)}
                   >
                     <img 
@@ -626,17 +689,18 @@ export default function ProjectsGallery() {
                     />
                   </div>
                   <p 
-                    className="text-xs lg:text-sm font-medium mt-4 leading-relaxed"
+                    className="text-xs sm:text-sm font-medium mt-3 sm:mt-4 leading-relaxed px-1"
                     style={{ 
                       fontFamily: "'Fredoka', sans-serif",
-                      color: '#FF69B4'
+                      color: '#FF69B4',
+                      lineHeight: '1.6'
                     }}
                   >
                     {project.description}
                   </p>
                   <button 
                     onClick={() => openImagePopup(project.image)}
-                    className="view-more-btn px-6 py-2 rounded-full text-white text-xs font-bold uppercase mt-4"
+                    className="view-more-btn px-4 sm:px-6 py-2 rounded-full text-white text-xs font-bold uppercase mt-3 sm:mt-4"
                     style={{ fontFamily: "'Fredoka', sans-serif" }}
                   >
                     VIEW MORE
@@ -648,11 +712,11 @@ export default function ProjectsGallery() {
         </div>
 
         {/* BRANDING PROJECTS SECTION */}
-        <div className="py-24 relative z-10" ref={addToRefs('branding')}>
-          <div className="max-w-7xl mx-auto px-6 lg:px-12">
-            <div className="flex justify-between items-start mb-12">
+        <div className="py-12 sm:py-16 md:py-24 relative z-10" ref={addToRefs('branding')}>
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
+            <div className="flex flex-col lg:flex-row justify-between items-start mb-8 sm:mb-10 md:mb-12 gap-4">
               <h2 
-                className={`section-header text-4xl lg:text-5xl font-extrabold slide-in-left ${isVisible('branding') ? 'visible' : ''}`}
+                className={`section-header text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold slide-in-left ${isVisible('branding') ? 'visible' : ''}`}
                 style={{ 
                   fontFamily: "'Fredoka', sans-serif",
                   color: '#FF69B4'
@@ -661,19 +725,21 @@ export default function ProjectsGallery() {
                 BRANDING PROJECTS
               </h2>
               <p 
-                className={`text-sm lg:text-base font-medium max-w-md text-right slide-in-right ${isVisible('branding') ? 'visible' : ''}`}
+                className={`text-xs sm:text-sm md:text-base font-medium max-w-md lg:text-right slide-in-right ${isVisible('branding') ? 'visible' : ''}`}
                 style={{ 
                   fontFamily: "'Fredoka', sans-serif",
                   color: '#FF69B4',
-                  opacity: 0.8
+                  opacity: 0.8,
+                  lineHeight: '1.5'
                 }}
               >
-                LOGOS AND DESIGN SYSTEMS FOR PERSONAL AND<br />
+                LOGOS AND DESIGN SYSTEMS FOR PERSONAL AND
+                <br className="hidden sm:inline" />
                 OCCASSIONAL CUSTOMIZED PROJECTS FOR PEERS.
               </p>
             </div>
 
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
               {[
                 { src: "/ProjectsGallery/13.png", delay: "delay-200" },
                 { src: "/ProjectsGallery/17.png", delay: "delay-300" },
@@ -682,10 +748,10 @@ export default function ProjectsGallery() {
               ].map((project, index) => (
                 <div 
                   key={index} 
-                  className={`project-card rounded-3xl overflow-hidden shadow-xl bg-white rotate-in ${project.delay} ${isVisible('branding') ? 'visible' : ''}`}
+                  className={`project-card rounded-2xl sm:rounded-3xl overflow-hidden shadow-xl bg-white rotate-in ${project.delay} ${isVisible('branding') ? 'visible' : ''}`}
                   onClick={() => openImagePopup(project.src)}
                 >
-                  <div className="aspect-square flex items-center justify-center p-8">
+                  <div className="aspect-square flex items-center justify-center p-4 sm:p-6 md:p-8">
                     <img 
                       src={project.src} 
                       alt={`Brand Logo ${index + 1}`}
@@ -697,9 +763,9 @@ export default function ProjectsGallery() {
             </div>
 
             {/* KAMADHIS UGM Section */}
-            <div className="mt-16" ref={addToRefs('kamadhis')}>
+            <div className="mt-12 sm:mt-14 md:mt-16" ref={addToRefs('kamadhis')}>
               <h3 
-                className={`text-2xl lg:text-3xl font-extrabold mb-6 fade-in-down ${isVisible('kamadhis') ? 'visible' : ''}`}
+                className={`text-xl sm:text-2xl md:text-3xl font-extrabold mb-4 sm:mb-6 fade-in-down ${isVisible('kamadhis') ? 'visible' : ''}`}
                 style={{ 
                   fontFamily: "'Fredoka', sans-serif",
                   color: '#FF69B4'
@@ -708,7 +774,7 @@ export default function ProjectsGallery() {
                 • KAMADHIS UGM
               </h3>
 
-              <div className="grid grid-cols-2 md:grid-cols-5 gap-6">
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 sm:gap-6">
                 {[
                   { src: "ProjectsGallery/18.png", text: "A design celebrating global access to information.", delay: "delay-100" },
                   { src: "ProjectsGallery/19.png", text: "Celebrating World Telecommunication Day through communication.", delay: "delay-200" },
@@ -718,7 +784,7 @@ export default function ProjectsGallery() {
                 ].map((item, index) => (
                   <div 
                     key={index}
-                    className={`project-card rounded-3xl overflow-hidden shadow-xl bg-gradient-to-b from-blue-100 to-green-100 scale-in ${item.delay} ${isVisible('kamadhis') ? 'visible' : ''}`}
+                    className={`project-card rounded-2xl sm:rounded-3xl overflow-hidden shadow-xl bg-gradient-to-b from-blue-100 to-green-100 scale-in ${item.delay} ${isVisible('kamadhis') ? 'visible' : ''}`}
                     onClick={() => openImagePopup(item.src)}
                   >
                     <div className="aspect-square">
@@ -730,11 +796,12 @@ export default function ProjectsGallery() {
                       )}
                       {item.text && (
                         <div 
-                          className="p-7"
+                          className="p-3 sm:p-5 md:p-7"
                           style={{ 
                             fontFamily: "'Fredoka', sans-serif",
                             color: '#FF69B4',
-                            lineHeight: '1.8'
+                            lineHeight: '1.6',
+                            fontSize: 'clamp(0.625rem, 2vw, 0.875rem)'
                           }}
                         >
                           <p>{item.text}</p>
@@ -747,9 +814,9 @@ export default function ProjectsGallery() {
             </div>
 
             {/* KOMAKO Section */}
-            <div className="mt-16" ref={addToRefs('komako')}>
+            <div className="mt-12 sm:mt-14 md:mt-16" ref={addToRefs('komako')}>
               <h3 
-                className={`text-2xl lg:text-3xl font-extrabold mb-6 fade-in-down ${isVisible('komako') ? 'visible' : ''}`}
+                className={`text-xl sm:text-2xl md:text-3xl font-extrabold mb-4 sm:mb-6 fade-in-down ${isVisible('komako') ? 'visible' : ''}`}
                 style={{ 
                   fontFamily: "'Fredoka', sans-serif",
                   color: '#FF69B4'
@@ -758,11 +825,11 @@ export default function ProjectsGallery() {
                 • KOMAKO
               </h3>
 
-              <div className="grid grid-cols-2 md:grid-cols-5 gap-6">
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-6">
                 {[25, 26, 27, 28, 29, 30, 31].map((num, index) => (
                   <div 
                     key={num}
-                    className={`project-card rounded-3xl overflow-hidden shadow-xl bg-gradient-to-b from-blue-100 to-green-100 zoom-in delay-${(index + 1) * 100} ${isVisible('komako') ? 'visible' : ''}`}
+                    className={`project-card rounded-2xl sm:rounded-3xl overflow-hidden shadow-xl bg-gradient-to-b from-blue-100 to-green-100 zoom-in delay-${(index + 1) * 100} ${isVisible('komako') ? 'visible' : ''}`}
                     onClick={() => openImagePopup(`ProjectsGallery/${num}.jpeg`)}
                   >
                     <div className="aspect-square">
@@ -776,13 +843,14 @@ export default function ProjectsGallery() {
         </div>
 
         {/* PERSONAL PROJECTS SECTION */}
-        <div className="py-24 relative z-10" ref={addToRefs('personal')}>
-          <div className="max-w-7xl mx-auto px-6 lg:px-12">
+        <div className="py-12 sm:py-16 md:py-24 relative z-10" ref={addToRefs('personal')}>
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
             <h2 
-              className={`section-header text-4xl lg:text-5xl font-extrabold mb-12 text-center fade-in-down ${isVisible('personal') ? 'visible' : ''}`}
+              className={`section-header text-xl sm:text-2xl md:text-3xl lg:text-5xl font-extrabold mb-8 sm:mb-10 md:mb-12 text-center fade-in-down ${isVisible('personal') ? 'visible' : ''}`}
               style={{ 
                 fontFamily: "'Fredoka', sans-serif",
-                color: '#FF69B4'
+                color: '#FF69B4',
+                lineHeight: '1.3'
               }}
             >
               PERSONAL PROJECTS | ILLUSTRATIONS | PAINTING
@@ -791,17 +859,18 @@ export default function ProjectsGallery() {
             {/* Masonry Grid */}
             <div className="masonry-grid">
               <div 
-                className={`masonry-item-large project-card rounded-3xl overflow-hidden shadow-xl bg-gradient-to-b from-white to-white slide-in-left delay-200 ${isVisible('personal') ? 'visible' : ''}`}
+                className={`masonry-item-large project-card rounded-2xl sm:rounded-3xl overflow-hidden shadow-xl bg-gradient-to-b from-white to-white slide-in-left delay-200 ${isVisible('personal') ? 'visible' : ''}`}
                 onClick={() => openImagePopup('ProjectsGallery/32.jpeg')}
               >
                 <div className="w-full h-full">
                   <img src="ProjectsGallery/32.jpeg" alt="" />
                   <div 
-                    className="p-7"
+                    className="p-3 sm:p-5 md:p-7"
                     style={{ 
                       fontFamily: "'Fredoka', sans-serif",
                       color: '#FF69B4',
-                      lineHeight: '1.8'
+                      lineHeight: '1.6',
+                      fontSize: 'clamp(0.625rem, 2vw, 0.875rem)'
                     }}
                   >
                     <p>
@@ -812,7 +881,7 @@ export default function ProjectsGallery() {
               </div>
 
               <div 
-                className={`project-card rounded-3xl overflow-hidden shadow-xl bg-gradient-to-b from-white to-white slide-in-right delay-300 ${isVisible('personal') ? 'visible' : ''}`}
+                className={`project-card rounded-2xl sm:rounded-3xl overflow-hidden shadow-xl bg-gradient-to-b from-white to-white slide-in-right delay-300 ${isVisible('personal') ? 'visible' : ''}`}
                 onClick={() => openImagePopup('ProjectsGallery/37.jpeg')}
               >
                 <div className="aspect-square">
@@ -822,17 +891,18 @@ export default function ProjectsGallery() {
               </div>
 
               <div 
-                className={`masonry-item-wide project-card rounded-3xl overflow-hidden shadow-xl bg-gradient-to-b from-white to-white zoom-in delay-400 ${isVisible('personal') ? 'visible' : ''}`}
+                className={`masonry-item-wide project-card rounded-2xl sm:rounded-3xl overflow-hidden shadow-xl bg-gradient-to-b from-white to-white zoom-in delay-400 ${isVisible('personal') ? 'visible' : ''}`}
                 onClick={() => openImagePopup('ProjectsGallery/33.jpeg')}
               >
                 <div className="aspect-[2/1]">
                   <img src="ProjectsGallery/33.jpeg" alt="" />
                   <div 
-                    className="p-7"
+                    className="p-3 sm:p-5 md:p-7"
                     style={{ 
                       fontFamily: "'Fredoka', sans-serif",
                       color: '#FF69B4',
-                      lineHeight: '1.8'
+                      lineHeight: '1.6',
+                      fontSize: 'clamp(0.625rem, 2vw, 0.875rem)'
                     }}
                   >
                     <p>
@@ -843,7 +913,7 @@ export default function ProjectsGallery() {
               </div>
 
               <div 
-                className={`masonry-item-tall project-card rounded-3xl overflow-hidden shadow-xl bg-gradient-to-b from-white to-white rotate-in delay-500 ${isVisible('personal') ? 'visible' : ''}`}
+                className={`masonry-item-tall project-card rounded-2xl sm:rounded-3xl overflow-hidden shadow-xl bg-gradient-to-b from-white to-white rotate-in delay-500 ${isVisible('personal') ? 'visible' : ''}`}
                 onClick={() => openImagePopup('ProjectsGallery/36.jpeg')}
               >
                 <div className="aspect-[1/2]">
@@ -853,7 +923,7 @@ export default function ProjectsGallery() {
               </div>
 
               <div 
-                className={`project-card rounded-3xl overflow-hidden shadow-xl bg-gradient-to-b from-blue-100 to-green-100 flip-in delay-600 ${isVisible('personal') ? 'visible' : ''}`}
+                className={`project-card rounded-2xl sm:rounded-3xl overflow-hidden shadow-xl bg-gradient-to-b from-blue-100 to-green-100 flip-in delay-600 ${isVisible('personal') ? 'visible' : ''}`}
                 onClick={() => openImagePopup('ProjectsGallery/35.jpeg')}
               >
                 <div className="aspect-square">
@@ -862,7 +932,7 @@ export default function ProjectsGallery() {
               </div>
 
               <div 
-                className={`masonry-item-wide project-card rounded-3xl overflow-hidden shadow-xl bg-gradient-to-b from-blue-100 to-green-100 scale-in delay-700 h-fit ${isVisible('personal') ? 'visible' : ''}`}
+                className={`masonry-item-wide project-card rounded-2xl sm:rounded-3xl overflow-hidden shadow-xl bg-gradient-to-b from-blue-100 to-green-100 scale-in delay-700 h-fit ${isVisible('personal') ? 'visible' : ''}`}
                 onClick={() => openImagePopup('ProjectsGallery/5.jpeg')}
               >
                 <div className="aspect-[2/1]">
@@ -872,9 +942,9 @@ export default function ProjectsGallery() {
             </div>
 
             {/* Bottom Text Boxes */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-16">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 mt-12 sm:mt-14 md:mt-16">
               <div 
-                className={`project-card rounded-3xl overflow-hidden shadow-xl bg-gradient-to-b from-blue-100 to-green-100 slide-in-left delay-200 ${isVisible('personal') ? 'visible' : ''}`}
+                className={`project-card rounded-2xl sm:rounded-3xl overflow-hidden shadow-xl bg-gradient-to-b from-blue-100 to-green-100 slide-in-left delay-200 ${isVisible('personal') ? 'visible' : ''}`}
                 onClick={() => openImagePopup('ProjectsGallery/10.png')}
               >
                 <div className="aspect-[3/2] relative">
@@ -885,12 +955,14 @@ export default function ProjectsGallery() {
                   />
                   <div className="text-box-overlay absolute inset-0 bg-black opacity-50"></div>
                   
-                  <div className="absolute inset-0 flex items-end p-8">
+                  <div className="absolute inset-0 flex items-end p-4 sm:p-6 md:p-8">
                     <p 
-                      className="text-box-text text-xs lg:text-sm font-medium leading-relaxed relative z-10"
+                      className="text-box-text font-medium leading-relaxed relative z-10"
                       style={{ 
                         fontFamily: "'Fredoka', sans-serif",
-                        color: '#FFB5D9'
+                        color: '#FFB5D9',
+                        lineHeight: '1.5',
+                        fontSize: 'clamp(0.625rem, 2vw, 0.875rem)'
                       }}
                     >
                     MY TAKE ON CONTENT<br/>
@@ -906,7 +978,7 @@ export default function ProjectsGallery() {
               </div>
 
               <div 
-                className={`project-card rounded-3xl overflow-hidden shadow-xl bg-gradient-to-b from-blue-100 to-green-100 slide-in-right delay-400 ${isVisible('personal') ? 'visible' : ''}`}
+                className={`project-card rounded-2xl sm:rounded-3xl overflow-hidden shadow-xl bg-gradient-to-b from-blue-100 to-green-100 slide-in-right delay-400 ${isVisible('personal') ? 'visible' : ''}`}
                 onClick={() => openImagePopup('ProjectsGallery/8.jpg')}
               >
                 <div className="aspect-[3/2] relative">
@@ -917,12 +989,14 @@ export default function ProjectsGallery() {
                   />
                   <div className="text-box-overlay absolute inset-0 bg-black opacity-30"></div>
                   
-                  <div className="absolute inset-0 flex items-end p-8">
+                  <div className="absolute inset-0 flex items-end p-4 sm:p-6 md:p-8">
                     <p 
-                      className="text-box-text text-xs lg:text-sm font-medium leading-relaxed relative z-10"
+                      className="text-box-text font-medium leading-relaxed relative z-10"
                       style={{ 
                         fontFamily: "'Fredoka', sans-serif",
-                        color: '#FFB5D9'
+                        color: '#FFB5D9',
+                        lineHeight: '1.5',
+                        fontSize: 'clamp(0.625rem, 2vw, 0.875rem)'
                       }}
                     >
                     A PHOTOGRAPHED IMAGE OF<br/>

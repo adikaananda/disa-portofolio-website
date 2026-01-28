@@ -12,8 +12,10 @@ export default function Organizations() {
         }
       },
       {
-        threshold: 0.15,
-        rootMargin: '0px 0px -100px 0px'
+        // Threshold lebih rendah untuk mobile
+        threshold: 0.05,
+        // RootMargin lebih toleran
+        rootMargin: '0px 0px -50px 0px'
       }
     );
 
@@ -21,10 +23,16 @@ export default function Organizations() {
       observer.observe(sectionRef.current);
     }
 
+    // Fallback: set visible after delay jika observer tidak trigger
+    const fallbackTimer = setTimeout(() => {
+      setIsVisible(true);
+    }, 500);
+
     return () => {
       if (sectionRef.current) {
         observer.unobserve(sectionRef.current);
       }
+      clearTimeout(fallbackTimer);
     };
   }, []);
 
@@ -37,6 +45,7 @@ export default function Organizations() {
           background: linear-gradient(180deg, #F5F5F0 0%, #FFF5F8 100%);
           position: relative;
           overflow: hidden;
+          min-height: 100vh;
         }
         
         /* Improved pink wave decoration at top */
@@ -52,11 +61,11 @@ export default function Organizations() {
           z-index: 0;
         }
 
-        /* Scroll animations */
+        /* Scroll animations - dengan initial state yang lebih baik */
         .fade-in-up {
           opacity: 0;
-          transform: translateY(50px);
-          transition: opacity 1s ease-out, transform 1s ease-out;
+          transform: translateY(30px);
+          transition: opacity 0.8s ease-out, transform 0.8s ease-out;
         }
 
         .fade-in-up.visible {
@@ -66,8 +75,8 @@ export default function Organizations() {
 
         .scale-in {
           opacity: 0;
-          transform: scale(0.9);
-          transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+          transform: scale(0.95);
+          transition: opacity 0.6s ease-out, transform 0.6s ease-out;
         }
 
         .scale-in.visible {
@@ -76,11 +85,11 @@ export default function Organizations() {
         }
 
         .delay-100 { transition-delay: 0.1s; }
-        .delay-200 { transition-delay: 0.2s; }
-        .delay-300 { transition-delay: 0.3s; }
-        .delay-400 { transition-delay: 0.4s; }
-        .delay-500 { transition-delay: 0.5s; }
-        .delay-600 { transition-delay: 0.6s; }
+        .delay-200 { transition-delay: 0.15s; }
+        .delay-300 { transition-delay: 0.2s; }
+        .delay-400 { transition-delay: 0.25s; }
+        .delay-500 { transition-delay: 0.3s; }
+        .delay-600 { transition-delay: 0.35s; }
 
         /* Card hover effects */
         .org-card {
@@ -104,34 +113,71 @@ export default function Organizations() {
           box-shadow: 0 6px 25px rgba(255, 105, 180, 0.4);
           transform: translateY(-2px);
         }
+
+        /* Mobile responsive adjustments */
+        @media (max-width: 640px) {
+          .wave-top {
+            height: 120px;
+            transform: translateY(-60px);
+          }
+          
+          .org-card:hover {
+            transform: translateY(-4px);
+          }
+
+          /* Lebih smooth di mobile */
+          .fade-in-up {
+            transform: translateY(20px);
+          }
+
+          .scale-in {
+            transform: scale(0.98);
+          }
+
+          /* Reduce delays di mobile */
+          .delay-100 { transition-delay: 0.05s; }
+          .delay-200 { transition-delay: 0.1s; }
+          .delay-300 { transition-delay: 0.15s; }
+          .delay-400 { transition-delay: 0.2s; }
+          .delay-500 { transition-delay: 0.25s; }
+          .delay-600 { transition-delay: 0.3s; }
+        }
+
+        /* Debug helper - remove after testing */
+        @media (max-width: 640px) {
+          .organization-section {
+            background: linear-gradient(180deg, #F5F5F0 0%, #FFF5F8 100%);
+          }
+        }
       `}</style>
 
-      <section id="organizations" className="organization-section py-24 lg:py-32 relative" ref={sectionRef}>
+      <section id="organizations" className="organization-section py-12 sm:py-16 md:py-24 lg:py-32 relative" ref={sectionRef}>
         {/* Improved decorative wave at top */}
         <div className="wave-top"></div>
 
-        <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
           
           {/* Main Organizations */}
-          <div className="space-y-20">
+          <div className="space-y-12 sm:space-y-16 md:space-y-20">
             
             {/* EKA-CITTA KAMADHIS UGM */}
-            <div className={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-center fade-in-up ${isVisible ? 'visible' : ''}`}>
+            <div className={`grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 md:gap-12 items-center fade-in-up ${isVisible ? 'visible' : ''}`}>
               {/* Left - Image */}
               <div className="relative">
-                <div className="w-full aspect-[4/3] rounded-[60px] overflow-hidden">
+                <div className="w-full aspect-[4/3] rounded-[30px] sm:rounded-[40px] md:rounded-[60px] overflow-hidden">
                   <img 
                     src="/Organizational experience/Eka citta/Eka-citta.png" 
                     alt="Eka-citta Team"
                     className="w-full h-full object-cover"
+                    loading="eager"
                   />
                 </div>
               </div>
 
               {/* Right - Content */}
-              <div className="space-y-6">
+              <div className="space-y-4 sm:space-y-6">
                 <h3 
-                  className="text-3xl lg:text-4xl font-extrabold"
+                  className="text-2xl sm:text-3xl lg:text-4xl font-extrabold"
                   style={{ 
                     fontFamily: "'Fredoka', sans-serif",
                     color: '#FF69B4',
@@ -142,7 +188,7 @@ export default function Organizations() {
                 </h3>
                 
                 <p 
-                  className="text-base lg:text-lg font-medium"
+                  className="text-sm sm:text-base lg:text-lg font-medium"
                   style={{ 
                     fontFamily: "'Fredoka', sans-serif",
                     color: '#FF69B4',
@@ -153,11 +199,11 @@ export default function Organizations() {
                   [CREATIVE & PUBLICATION]
                 </p>
 
-                <div className="space-y-3 pt-4">
+                <div className="space-y-2 sm:space-y-3 pt-2 sm:pt-4">
                   {/* Role 1 */}
-                  <div className="flex items-center gap-4">
+                  <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4">
                     <div 
-                      className="flex-1 text-sm lg:text-base font-bold"
+                      className="flex-1 text-xs sm:text-sm lg:text-base font-bold"
                       style={{ 
                         fontFamily: "'Fredoka', sans-serif",
                         color: '#FF69B4'
@@ -169,7 +215,7 @@ export default function Organizations() {
                       href="https://drive.google.com/file/d/1g5-FaYwgjqvzG6w6NVmsfSawY39JVI-F/view?usp=drivesdk"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="view-more-btn px-6 py-2 rounded-full text-white text-xs font-bold uppercase"
+                      className="view-more-btn px-4 sm:px-6 py-1.5 sm:py-2 rounded-full text-white text-xs font-bold uppercase whitespace-nowrap"
                       style={{ fontFamily: "'Fredoka', sans-serif" }}
                     >
                       VIEW MORE
@@ -177,9 +223,9 @@ export default function Organizations() {
                   </div>
 
                   {/* Role 2 */}
-                  <div className="flex items-center gap-4">
+                  <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4">
                     <div 
-                      className="flex-1 text-sm lg:text-base font-bold"
+                      className="flex-1 text-xs sm:text-sm lg:text-base font-bold"
                       style={{ 
                         fontFamily: "'Fredoka', sans-serif",
                         color: '#FF69B4'
@@ -191,7 +237,7 @@ export default function Organizations() {
                       href="https://drive.google.com/file/d/1zT7bp08tI0XqpYVMsTfiQox6yks_Y6nR/view?usp=drivesdk"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="view-more-btn px-6 py-2 rounded-full text-white text-xs font-bold uppercase"
+                      className="view-more-btn px-4 sm:px-6 py-1.5 sm:py-2 rounded-full text-white text-xs font-bold uppercase whitespace-nowrap"
                       style={{ fontFamily: "'Fredoka', sans-serif" }}
                     >
                       VIEW MORE
@@ -199,9 +245,9 @@ export default function Organizations() {
                   </div>
 
                   {/* Role 3 */}
-                  <div className="flex items-center gap-4">
+                  <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4">
                     <div 
-                      className="flex-1 text-sm lg:text-base font-bold"
+                      className="flex-1 text-xs sm:text-sm lg:text-base font-bold"
                       style={{ 
                         fontFamily: "'Fredoka', sans-serif",
                         color: '#FF69B4'
@@ -213,7 +259,7 @@ export default function Organizations() {
                       href="https://drive.google.com/file/d/1wdW8DlmCi4Obouh8lsIeY3ONOOntKms3/view?usp=drivesdk"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="view-more-btn px-6 py-2 rounded-full text-white text-xs font-bold uppercase"
+                      className="view-more-btn px-4 sm:px-6 py-1.5 sm:py-2 rounded-full text-white text-xs font-bold uppercase whitespace-nowrap"
                       style={{ fontFamily: "'Fredoka', sans-serif" }}
                     >
                       VIEW MORE
@@ -223,14 +269,14 @@ export default function Organizations() {
 
                 {/* Info Box */}
                 <div 
-                  className="mt-8 p-6 rounded-3xl"
+                  className="mt-4 sm:mt-6 md:mt-8 p-4 sm:p-6 rounded-2xl sm:rounded-3xl"
                   style={{
                     background: 'linear-gradient(135deg, #FFE5F0 0%, #FFF0F5 100%)',
                     border: '3px solid #FFB6D9'
                   }}
                 >
                   <h4 
-                    className="text-lg font-extrabold mb-3"
+                    className="text-base sm:text-lg font-extrabold mb-2 sm:mb-3"
                     style={{ 
                       fontFamily: "'Fredoka', sans-serif",
                       color: '#FF69B4'
@@ -239,7 +285,7 @@ export default function Organizations() {
                     WHAT I DID IN THIS ORGANIZATION!
                   </h4>
                   <p 
-                    className="text-sm leading-relaxed"
+                    className="text-xs sm:text-sm leading-relaxed"
                     style={{ 
                       fontFamily: "'Fredoka', sans-serif",
                       color: '#FF69B4',
@@ -252,12 +298,12 @@ export default function Organizations() {
               </div>
             </div>
 
-            {/* KOMAKO - FIXED LAYOUT */}
-            <div className={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-center fade-in-up delay-200 ${isVisible ? 'visible' : ''}`}>
+            {/* KOMAKO */}
+            <div className={`grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 md:gap-12 items-center fade-in-up delay-200 ${isVisible ? 'visible' : ''}`}>
               {/* Left - Content with header */}
-              <div className="space-y-6">
+              <div className="space-y-4 sm:space-y-6">
                 <h3 
-                  className="text-3xl lg:text-4xl font-extrabold"
+                  className="text-2xl sm:text-3xl lg:text-4xl font-extrabold"
                   style={{ 
                     fontFamily: "'Fredoka', sans-serif",
                     color: '#FF69B4',
@@ -268,7 +314,7 @@ export default function Organizations() {
                 </h3>
                 
                 <p 
-                  className="text-base lg:text-lg font-medium"
+                  className="text-sm sm:text-base lg:text-lg font-medium"
                   style={{ 
                     fontFamily: "'Fredoka', sans-serif",
                     color: '#FF69B4',
@@ -278,11 +324,11 @@ export default function Organizations() {
                   STAFF FOR THE MEDIA COMMUNICATION
                 </p>
 
-                <div className="space-y-3">
+                <div className="space-y-2 sm:space-y-3">
                   {/* Role */}
-                  <div className="flex items-center gap-4">
+                  <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4">
                     <div 
-                      className="flex-1 text-sm lg:text-base font-bold"
+                      className="flex-1 text-xs sm:text-sm lg:text-base font-bold"
                       style={{ 
                         fontFamily: "'Fredoka', sans-serif",
                         color: '#FF69B4'
@@ -294,7 +340,7 @@ export default function Organizations() {
                       href="https://drive.google.com/drive/folders/1hA4ZHhY7No6ro2TnGLzbnG8DaY7u43bW"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="view-more-btn px-6 py-2 rounded-full text-white text-xs font-bold uppercase"
+                      className="view-more-btn px-4 sm:px-6 py-1.5 sm:py-2 rounded-full text-white text-xs font-bold uppercase whitespace-nowrap"
                       style={{ fontFamily: "'Fredoka', sans-serif" }}
                     >
                       VIEW MORE
@@ -302,27 +348,16 @@ export default function Organizations() {
                   </div>
                 </div>
 
-                <p 
-                  className="text-base lg:text-lg font-medium pt-4"
-                  style={{ 
-                    fontFamily: "'Fredoka', sans-serif",
-                    color: '#FF69B4',
-                    opacity: 0.8
-                  }}
-                >
-                  BEING A PART OF KOMAKO ALLOWED ME TO ENHANCE MY PROFESSIONAL SKILLS AND BALANCING SIKEM SCHEDULES ON A PROFESSIONAL LEVEL WHILE KEEPING UP WITH STANDARDS.
-                </p>
-
                 {/* Info Box */}
                 <div 
-                  className="p-6 rounded-3xl"
+                  className="p-4 sm:p-6 rounded-2xl sm:rounded-3xl"
                   style={{
                     background: 'linear-gradient(135deg, #FFE5F0 0%, #FFF0F5 100%)',
                     border: '3px solid #FFB6D9'
                   }}
                 >
                   <h4 
-                    className="text-lg font-extrabold mb-3"
+                    className="text-base sm:text-lg font-extrabold mb-2 sm:mb-3"
                     style={{ 
                       fontFamily: "'Fredoka', sans-serif",
                       color: '#FF69B4'
@@ -330,25 +365,38 @@ export default function Organizations() {
                   >
                     WHAT I DID IN THIS ORGANIZATION!
                   </h4>
+
+                  <p 
+                  className="text-sm sm:text-base lg:text-sm font-small pt-2 sm:pt-4"
+                  style={{ 
+                    fontFamily: "'Fredoka', sans-serif",
+                    color: '#FF69B4',
+                    opacity: 0.8
+                  }}
+                >
+                 
+                  BEING A PART OF KOMAKO ALLOWED ME TO ENHANCE MY PROFESSIONAL SKILLS AND BALANCING SIKEM SCHEDULES ON A PROFESSIONAL LEVEL WHILE KEEPING UP WITH STANDARDS.
+                </p>
                 </div>
               </div>
 
               {/* Right - Image only */}
               <div className="relative">
-                <div className="w-full aspect-[4/3] rounded-[60px] overflow-hidden">
+                <div className="w-full aspect-[4/3] rounded-[30px] sm:rounded-[40px] md:rounded-[60px] overflow-hidden">
                   <img 
                     src="/Organizational experience/Komako/komako.png" 
                     alt="Komako Team"
                     className="w-full h-full object-cover"
+                    loading="eager"
                   />
                 </div>
               </div>
             </div>
 
             {/* Short-term Organizational Experience - SIDE BY SIDE GRID */}
-            <div className={`space-y-12 pt-12 fade-in-up delay-300 ${isVisible ? 'visible' : ''}`}>
+            <div className={`space-y-6 sm:space-y-8 md:space-y-12 pt-6 sm:pt-8 md:pt-12 fade-in-up delay-300 ${isVisible ? 'visible' : ''}`}>
               <h3 
-                className="text-3xl lg:text-4xl font-extrabold text-center"
+                className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-center"
                 style={{ 
                   fontFamily: "'Fredoka', sans-serif",
                   color: '#FF69B4'
@@ -357,25 +405,26 @@ export default function Organizations() {
                 SHORT-TERM ORGANIZATIONAL EXPERIENCE
               </h3>
 
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
                 {/* COMPARE Card */}
-                <div className={`org-card rounded-[50px] overflow-hidden shadow-xl scale-in delay-400 ${isVisible ? 'visible' : ''}`}
+                <div className={`org-card rounded-[30px] sm:rounded-[40px] md:rounded-[50px] overflow-hidden shadow-xl scale-in delay-400 ${isVisible ? 'visible' : ''}`}
                   style={{ background: 'linear-gradient(135deg, #FFE5F0 0%, #FFF0F5 100%)' }}
                 >
-                  <div className="p-8 space-y-6">
+                  <div className="p-4 sm:p-6 md:p-8 space-y-4 sm:space-y-6">
                     {/* Image */}
-                    <div className="aspect-[4/3] rounded-[40px] overflow-hidden">
+                    <div className="aspect-[4/3] rounded-[24px] sm:rounded-[32px] md:rounded-[40px] overflow-hidden">
                       <img 
                         src="/Short term Organization/compare.png" 
                         alt="Communication Party and Recreation"
                         className="w-full h-full object-cover"
+                        loading="lazy"
                       />
                     </div>
                     
                     {/* Content */}
-                    <div className="space-y-4">
+                    <div className="space-y-3 sm:space-y-4">
                       <h4 
-                        className="text-xl lg:text-2xl font-extrabold"
+                        className="text-lg sm:text-xl lg:text-2xl font-extrabold"
                         style={{ 
                           fontFamily: "'Fredoka', sans-serif",
                           color: '#FF69B4'
@@ -384,7 +433,7 @@ export default function Organizations() {
                         COMMUNICATION PARTY AND RECREATION<br />(COMPARE)
                       </h4>
                       <p 
-                        className="text-sm lg:text-base font-bold"
+                        className="text-xs sm:text-sm lg:text-base font-bold"
                         style={{ 
                           fontFamily: "'Fredoka', sans-serif",
                           color: '#FF69B4',
@@ -406,7 +455,7 @@ export default function Organizations() {
                       
                       {/* Pink box with details */}
                       <div 
-                        className="rounded-2xl p-4"
+                        className="rounded-xl sm:rounded-2xl p-3 sm:p-4"
                         style={{ 
                           background: '#FFB5D9',
                         }}
@@ -420,7 +469,7 @@ export default function Organizations() {
                         >
                           <li>• CONCEPTUALIZED PROGRAM IDEAS</li>
                           <li>• LED PREPARATION OF CAMPUS EXHIBITION</li>
-                          <li>• HANDLED PERM OF REFERENCE & CROWD MANAGEMENT</li>
+                          <li>• HANDLED TERM OF REFERENCE & CROWD MANAGEMENT</li>
                         </ul>
                       </div>
                     </div>
@@ -428,23 +477,24 @@ export default function Organizations() {
                 </div>
 
                 {/* KULA NUWUN Card */}
-                <div className={`org-card rounded-[50px] overflow-hidden shadow-xl scale-in delay-500 ${isVisible ? 'visible' : ''}`}
-                  style={{ background: 'linear-gradient(135dx, #FFE5F0 0%, #FFF0F5 100%)' }}
+                <div className={`org-card rounded-[30px] sm:rounded-[40px] md:rounded-[50px] overflow-hidden shadow-xl scale-in delay-500 ${isVisible ? 'visible' : ''}`}
+                  style={{ background: 'linear-gradient(135deg, #FFE5F0 0%, #FFF0F5 100%)' }}
                 >
-                  <div className="p-8 space-y-6">
+                  <div className="p-4 sm:p-6 md:p-8 space-y-4 sm:space-y-6">
                     {/* Image */}
-                    <div className="aspect-[4/3] rounded-[40px] overflow-hidden">
+                    <div className="aspect-[4/3] rounded-[24px] sm:rounded-[32px] md:rounded-[40px] overflow-hidden">
                       <img 
                         src="/Short term Organization/KNP.png" 
                         alt="Kula Nuwun Party 2024"
                         className="w-full h-full object-cover"
+                        loading="lazy"
                       />
                     </div>
                     
                     {/* Content */}
-                    <div className="space-y-4">
+                    <div className="space-y-3 sm:space-y-4">
                       <h4 
-                        className="text-xl lg:text-2xl font-extrabold"
+                        className="text-lg sm:text-xl lg:text-2xl font-extrabold"
                         style={{ 
                           fontFamily: "'Fredoka', sans-serif",
                           color: '#FF69B4'
@@ -453,7 +503,7 @@ export default function Organizations() {
                         KULA NUWUN PARTY 2024
                       </h4>
                       <p 
-                        className="text-sm lg:text-base font-bold"
+                        className="text-xs sm:text-sm lg:text-base font-bold"
                         style={{ 
                           fontFamily: "'Fredoka', sans-serif",
                           color: '#FF69B4',
@@ -475,7 +525,7 @@ export default function Organizations() {
                       
                       {/* Pink box with details */}
                       <div 
-                        className="rounded-2xl p-4"
+                        className="rounded-xl sm:rounded-2xl p-3 sm:p-4"
                         style={{ 
                           background: '#FFB5D9',
                         }}
@@ -488,7 +538,7 @@ export default function Organizations() {
                           }}
                         >
                           <li>• SUCCESSFULLY CLOSED THE DEAL WITH 3/7 MAJOR SPONSORS</li>
-                          <li>• EXPERTLY NEGOTIATED WITH BUS SPONSORS</li>
+                          <li>• EXPERTLY NEGOTIATED WITH OUR SPONSORS</li>
                           <li>• MANAGED LETTERS & DEALS WITH SPONSORS</li>
                         </ul>
                       </div>
@@ -499,9 +549,9 @@ export default function Organizations() {
             </div>
 
             {/* Social Experience */}
-            <div className={`space-y-8 pt-8 fade-in-up delay-400 ${isVisible ? 'visible' : ''}`}>
+            <div className={`space-y-6 sm:space-y-8 pt-6 sm:pt-8 fade-in-up delay-400 ${isVisible ? 'visible' : ''}`}>
               <h3 
-                className="text-3xl lg:text-4xl font-extrabold"
+                className="text-2xl sm:text-3xl lg:text-4xl font-extrabold"
                 style={{ 
                   fontFamily: "'Fredoka', sans-serif",
                   color: '#FF69B4'
@@ -510,11 +560,11 @@ export default function Organizations() {
                 SOCIAL<br />EXPERIENCE
               </h3>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
                 {/* Master of Ceremony */}
                 <div className={`org-card scale-in delay-500 ${isVisible ? 'visible' : ''}`}>
                   <h4 
-                    className="text-lg lg:text-xl font-extrabold mb-4 leading-tight"
+                    className="text-base sm:text-lg lg:text-xl font-extrabold mb-3 sm:mb-4 leading-tight"
                     style={{ 
                       fontFamily: "'Fredoka', sans-serif",
                       color: '#FF69B4'
@@ -522,12 +572,13 @@ export default function Organizations() {
                   >
                     MASTER OF CEREMONY<br />VESAK DAY CELEBRATION<br />2025
                   </h4>
-                  <div className="rounded-[40px] overflow-hidden shadow-xl">
+                  <div className="rounded-[24px] sm:rounded-[32px] md:rounded-[40px] overflow-hidden shadow-xl">
                     <div className="aspect-[4/3] overflow-hidden">
                       <img 
                         src="/Social Experience/MC Waisak 2.jpeg" 
                         alt="Master of Ceremony"
                         className="w-full h-full object-cover"
+                        loading="lazy"
                       />
                     </div>
                   </div>
@@ -536,7 +587,7 @@ export default function Organizations() {
                 {/* Social Service Program */}
                 <div className={`org-card scale-in delay-600 ${isVisible ? 'visible' : ''}`}>
                   <h4 
-                    className="text-lg lg:text-xl font-extrabold mb-4 leading-tight"
+                    className="text-base sm:text-lg lg:text-xl font-extrabold mb-3 sm:mb-4 leading-tight"
                     style={{ 
                       fontFamily: "'Fredoka', sans-serif",
                       color: '#FF69B4'
@@ -544,12 +595,13 @@ export default function Organizations() {
                   >
                     SOCIAL SERVICE PROGRAM<br />DESIGN TEAM, VOLUNTEER<br />KAMADHIS UGM 2025
                   </h4>
-                  <div className="rounded-[40px] overflow-hidden shadow-xl">
+                  <div className="rounded-[24px] sm:rounded-[32px] md:rounded-[40px] overflow-hidden shadow-xl">
                     <div className="aspect-[4/3] overflow-hidden">
                       <img 
                         src="/Social Experience/Social Service.jpeg" 
                         alt="Social Service Program"
                         className="w-full h-full object-cover"
+                        loading="lazy"
                       />
                     </div>
                   </div>
@@ -558,7 +610,7 @@ export default function Organizations() {
                 {/* Selasar Theatre */}
                 <div className={`org-card scale-in delay-600 ${isVisible ? 'visible' : ''}`}>
                   <h4 
-                    className="text-lg lg:text-xl font-extrabold mb-4 leading-tight"
+                    className="text-base sm:text-lg lg:text-xl font-extrabold mb-3 sm:mb-4 leading-tight"
                     style={{ 
                       fontFamily: "'Fredoka', sans-serif",
                       color: '#FF69B4'
@@ -566,12 +618,13 @@ export default function Organizations() {
                   >
                     SELASAR THEATRE<br />COMMUNITY AND PROPERTY<br />TEAM 2024
                   </h4>
-                  <div className="rounded-[40px] overflow-hidden shadow-xl">
+                  <div className="rounded-[24px] sm:rounded-[32px] md:rounded-[40px] overflow-hidden shadow-xl">
                     <div className="aspect-[4/3] overflow-hidden">
                       <img 
                         src="/Social Experience/Teater Selasar.jpeg" 
                         alt="Selasar Theatre"
                         className="w-full h-full object-cover"
+                        loading="lazy"
                       />
                     </div>
                   </div>
